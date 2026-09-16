@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+  <sys_choice_set action="INSERT_OR_UPDATE" apply_defaults="true" field="metro_status" table="x_1958892_metro_0_metro_booking" version="3">
+    <sys_choice_set action="INSERT_OR_UPDATE" apply_defaults="true">
+      <sys_id>c1325effbfd84590b54d9d7126e9e86f</sys_id>
+      <element>metro_status</element>
+      <sys_update_name>sys_choice_x_1958892_metro_0_metro_booking_metro_status</sys_update_name>
+      <name>x_1958892_metro_0_metro_booking</name>
+      <sys_class_name>sys_choice_set</sys_class_name>
+      <sys_scope display_value="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+      <sys_package display_value="x_1958892_metro_0" source="9eb33de65357cb506fbf79b0a0490e06">9eb33de65357cb506fbf79b0a0490e06</sys_package>
+      <sys_name>metro_status</sys_name>
+    </sys_choice_set>
+    <sys_choice action="INSERT_OR_UPDATE" apply_defaults="true">
+      <sys_id>e0f751de8854406da7240cf80f4c4a27</sys_id>
+      <name>x_1958892_metro_0_metro_booking</name>
+      <element>metro_status</element>
+      <label>Pending</label>
+      <value>pending</value>
+      <sequence>1</sequence>
+      <language>en</language>
+    </sys_choice>
+    <sys_choice action="INSERT_OR_UPDATE" apply_defaults="true">
+      <sys_id>249339addf0f45a9a558f69961f255f0</sys_id>
+      <name>x_1958892_metro_0_metro_booking</name>
+      <element>metro_status</element>
+      <label>Approved</label>
+      <value>approved</value>
+      <sequence>2</sequence>
+      <language>en</language>
+    </sys_choice>
+    <sys_choice action="INSERT_OR_UPDATE" apply_defaults="true">
+      <sys_id>9cd2cbbbef6b4488952ca3eb0bd483e6</sys_id>
+      <name>x_1958892_metro_0_metro_booking</name>
+      <element>metro_status</element>
+      <label>Generated</label>
+      <value>generated</value>
+      <sequence>3</sequence>
+      <language>en</language>
+    </sys_choice>
+    <sys_choice action="INSERT_OR_UPDATE" apply_defaults="true">
+      <sys_id>e7f2a7a16ab0464cb02adb812449cdb5</sys_id>
+      <name>x_1958892_metro_0_metro_booking</name>
+      <element>metro_status</element>
+      <label>Rejected</label>
+      <value>rejected</value>
+      <sequence>4</sequence>
+      <language>en</language>
+    </sys_choice>
+    <sys_choice action="INSERT_OR_UPDATE" apply_defaults="true">
+      <sys_id>3f5f79cfb4004106b93309943918f514</sys_id>
+      <name>x_1958892_metro_0_metro_booking</name>
+      <element>metro_status</element>
+      <label>Cancelled</label>
+      <value>cancelled</value>
+      <sequence>5</sequence>
+      <language>en</language>
+    </sys_choice>
+  </sys_choice_set>
+</record_update>
