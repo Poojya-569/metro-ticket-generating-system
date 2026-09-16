@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_number">
+  <sys_number action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>2bbb96ea539bcb506fbf79b0a0490eda</sys_id>
+    <sys_scope display_value="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+    <sys_update_name>sys_number_2bbb96ea539bcb506fbf79b0a0490eda</sys_update_name>
+    <category>x_1958892_metro_0_metro_booking</category>
+    <maximum_digits>7</maximum_digits>
+    <number>1001</number>
+    <prefix>MBK</prefix>
+  </sys_number>
+</record_update>
