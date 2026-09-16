@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="x_1958892_metro_0_metro_route_master">
+  <x_1958892_metro_0_metro_route_master action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>3f049c393e434ce4995f0393c746f18e</sys_id>
+    <sys_scope display_value="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+    <sys_update_name>x_1958892_metro_0_metro_route_master_3f049c393e434ce4995f0393c746f18e</sys_update_name>
+    <active>true</active>
+    <destination_station>49e18e2653d7cb506fbf79b0a0490e5c</destination_station>
+    <distance_km>6.5</distance_km>
+    <duration_minutes>14</duration_minutes>
+    <route_name>Parade Ground - Ameerpet</route_name>
+    <source_station>4583862a53d7cb506fbf79b0a0490e8d</source_station>
+  </x_1958892_metro_0_metro_route_master>
+</record_update>
