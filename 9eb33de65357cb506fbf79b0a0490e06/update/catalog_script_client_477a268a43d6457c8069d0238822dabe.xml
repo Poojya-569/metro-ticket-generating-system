@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="catalog_script_client">
+  <catalog_script_client action="INSERT_OR_UPDATE" apply_defaults="true">
+    <sys_id>477a268a43d6457c8069d0238822dabe</sys_id>
+    <sys_scope display_value="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+    <sys_update_name>catalog_script_client_477a268a43d6457c8069d0238822dabe</sys_update_name>
+    <active>true</active>
+    <applies_catalog>true</applies_catalog>
+    <applies_req_item>false</applies_req_item>
+    <applies_sc_task>false</applies_sc_task>
+    <applies_target_record>false</applies_target_record>
+    <applies_to>item</applies_to>
+    <cat_item>c4ab8de9d05b41c1bd2eb1c7bfab54aa</cat_item>
+    <cat_variable>IO:28bdab1289234f3a85cf5b3e3561eb34</cat_variable>
+    <global>false</global>
+    <isolate_script>true</isolate_script>
+    <name>Calculate Metro Fare - Destination</name>
+    <published_ref/>
+    <script><![CDATA[function onChange(control, oldValue, newValue, isLoading) {
+
+    if (isLoading) {
+        return;
+    }
+
+    calculateMetroFare();
+}
+
+
+function calculateMetroFare() {
+
+    var source =
+        g_form.getValue('source_station');
+
+    var destination =
+        g_form.getValue('destination_station');
+
+    var journeyType =
+        g_form.getValue('journey_type');
+
+    var passengers =
+        g_form.getValue('passenger_count');
+
+
+    // Clear previous calculated values before recalculating
+
+    g_form.setValue(
+        'calculated_distance',
+        ''
+    );
+
+    g_form.setValue(
+        'calculated_duration',
+        ''
+    );
+
+    g_form.setValue(
+        'calculated_fare',
+        ''
+    );
+
+
+    // Wait until all required values are available
+
+    if (
+        !source ||
+        !destination ||
+        !journeyType ||
+        !passengers
+    ) {
+        return;
+    }
+
+
+    // Source and destination cannot be same
+
+    if (source == destination) {
+
+        g_form.showFieldMsg(
+            'destination_station',
+            'Source and destination cannot be the same.',
+            'error'
+        );
+
+        return;
+    }
+
+
+    var ga =
+        new GlideAjax(
+            'x_1958892_metro_0.MetroFareAjax'
+        );
+
+
+    ga.addParam(
+        'sysparm_name',
+        'calculateFare'
+    );
+
+
+    ga.addParam(
+        'sysparm_source',
+        source
+    );
+
+
+    ga.addParam(
+        'sysparm_destination',
+        destination
+    );
+
+
+    ga.addParam(
+        'sysparm_journey_type',
+        journeyType
+    );
+
+
+    ga.addParam(
+        'sysparm_passengers',
+        passengers
+    );
+
+
+    ga.getXMLAnswer(
+        function(answer) {
+
+            if (!answer) {
+
+                g_form.addErrorMessage(
+                    'Unable to calculate metro fare.'
+                );
+
+                return;
+            }
+
+
+            var result;
+
+            try {
+
+                result =
+                    JSON.parse(answer);
+
+            } catch (e) {
+
+                g_form.addErrorMessage(
+                    'Invalid fare calculation response.'
+                );
+
+                return;
+            }
+
+
+            if (!result.success) {
+
+                g_form.addErrorMessage(
+                    result.message
+                );
+
+                return;
+            }
+
+
+            g_form.setValue(
+                'calculated_distance',
+                result.distance + ' km'
+            );
+
+
+            g_form.setValue(
+                'calculated_duration',
+                result.duration + ' minutes'
+            );
+
+
+            g_form.setValue(
+                'calculated_fare',
+                '₹' + result.totalFare
+            );
+        }
+    );
+}
+]]></script>
+    <type>onChange</type>
+    <ui_type>10</ui_type>
+    <va_supported>false</va_supported>
+    <variable_set/>
+  </catalog_script_client>
+</record_update>
