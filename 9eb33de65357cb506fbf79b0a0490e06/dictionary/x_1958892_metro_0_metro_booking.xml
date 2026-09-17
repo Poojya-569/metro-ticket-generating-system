@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="9fbb96ea539bcb506fbf79b0a0490e96" extends="task" label="Metro Booking" max_length="40" name="x_1958892_metro_0_metro_booking" type="collection">
+        <element label="Generated At" name="generated_at" type="glide_date_time"/>
+        <element label="Duration Minutes" name="duration_minutes" type="integer"/>
+        <element label="Refund Amount" name="refund_amount" type="decimal"/>
+        <element label="Distance KM" name="distance_km" type="decimal"/>
+        <element default="digital_qr" label="Ticket Medium" name="ticket_medium" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Digital QR Ticket" sequence="1" value="digital_qr"/>
+            </choice>
+        </element>
+        <element default="single" label="Journey Type" mandatory="true" name="journey_type" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Single Journey" sequence="1" value="single"/>
+                <element inactive_on_update="false" label="Return Journey" sequence="2" value="return"/>
+            </choice>
+        </element>
+        <element label="Destination Station" mandatory="true" name="destination_station" reference="x_1958892_metro_0_metro_station" type="reference"/>
+        <element label="Requested For" name="requested_for" reference="sys_user" type="reference"/>
+        <element label="Base Fare" name="base_fare" type="decimal"/>
+        <element label="Total Fare" name="total_fare" type="decimal"/>
+        <element label="Passenger Count" mandatory="true" name="passenger_count" type="integer"/>
+        <element label="Cancellation Reason" max_length="500" name="cancellation_reason" type="string"/>
+        <element label="Travel Date" mandatory="true" name="travel_date" type="glide_date"/>
+        <element label="Source Station" mandatory="true" name="source_station" reference="x_1958892_metro_0_metro_station" type="reference"/>
+        <element label="QR Data" max_length="4000" name="qr_data" type="string"/>
+        <element label="Ticket Number" max_length="100" name="ticket_number" type="string"/>
+        <element default="pending" label="Metro Status" mandatory="true" name="metro_status" type="choice">
+            <choice>
+                <element inactive_on_update="false" label="Approved" sequence="2" value="approved"/>
+                <element inactive_on_update="false" label="Cancelled" sequence="5" value="cancelled"/>
+                <element inactive_on_update="false" label="Generated" sequence="3" value="generated"/>
+                <element inactive_on_update="false" label="Pending" sequence="1" value="pending"/>
+                <element inactive_on_update="false" label="Rejected" sequence="4" value="rejected"/>
+            </choice>
+        </element>
+    </element>
+</database>

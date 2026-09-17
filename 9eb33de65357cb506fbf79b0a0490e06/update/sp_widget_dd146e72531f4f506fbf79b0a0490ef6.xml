@@ -1,0 +1,773 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller = function($timeout) {
+
+    var c = this;
+
+
+    function renderQR() {
+
+        $timeout(function() {
+
+            angular.forEach(
+                c.data.tickets || [],
+                function(ticket) {
+
+                    if (
+                        ticket.status == 'generated' &&
+                        ticket.qr_data
+                    ) {
+
+                        var element =
+                            document.getElementById(
+                                'qr-' + ticket.sys_id
+                            );
+
+                        if (!element) {
+                            return;
+                        }
+
+                        if (
+                            typeof QRCode === 'undefined'
+                        ) {
+
+                            console.error(
+                                'QRCode.js library is not loaded.'
+                            );
+
+                            return;
+                        }
+
+                        element.innerHTML = '';
+
+                        new QRCode(
+                            element,
+                            {
+                                text:
+                                    ticket.qr_data,
+
+                                width:
+                                    160,
+
+                                height:
+                                    160
+                            }
+                        );
+                    }
+                }
+            );
+
+        }, 500);
+    }
+
+
+    renderQR();
+
+
+    // ---------------------------------
+    // Cancel Ticket
+    // ---------------------------------
+
+    c.cancelTicket =
+        function(ticket) {
+
+            var reason =
+                window.prompt(
+                    'Enter cancellation reason:',
+                    ''
+                );
+
+            // User clicked Cancel on popup
+            if (reason === null) {
+                return;
+            }
+
+            c.server.get({
+
+                action:
+                    'cancel',
+
+                sys_id:
+                    ticket.sys_id,
+
+                reason:
+                    reason
+
+            }).then(function(response) {
+
+                c.data =
+                    response.data;
+
+                renderQR();
+
+            });
+        };
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.metro-tickets {&#13;
+    max-width: 1000px;&#13;
+    margin: 35px auto;&#13;
+    padding: 20px;&#13;
+}&#13;
+&#13;
+&#13;
+.page-heading {&#13;
+    display: flex;&#13;
+    justify-content: space-between;&#13;
+    align-items: center;&#13;
+    margin-bottom: 30px;&#13;
+}&#13;
+&#13;
+&#13;
+.page-heading h2 {&#13;
+    margin: 0;&#13;
+}&#13;
+&#13;
+&#13;
+.page-subtitle {&#13;
+    margin-top: 7px;&#13;
+    color: #666666;&#13;
+}&#13;
+&#13;
+&#13;
+.ticket-card {&#13;
+    background: #ffffff;&#13;
+    border: 1px solid #dddddd;&#13;
+    border-radius: 12px;&#13;
+    padding: 24px;&#13;
+    margin-bottom: 24px;&#13;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);&#13;
+}&#13;
+&#13;
+&#13;
+.ticket-header {&#13;
+    display: flex;&#13;
+    justify-content: space-between;&#13;
+    align-items: flex-start;&#13;
+    margin-bottom: 22px;&#13;
+}&#13;
+&#13;
+&#13;
+.ticket-header h3 {&#13;
+    margin-top: 0;&#13;
+    margin-bottom: 8px;&#13;
+}&#13;
+&#13;
+&#13;
+.route {&#13;
+    font-size: 18px;&#13;
+    font-weight: 500;&#13;
+}&#13;
+&#13;
+&#13;
+.route-arrow {&#13;
+    padding: 0 10px;&#13;
+}&#13;
+&#13;
+&#13;
+.ticket-details {&#13;
+    display: grid;&#13;
+    grid-template-columns: repeat(2, 1fr);&#13;
+    gap: 16px 30px;&#13;
+}&#13;
+&#13;
+&#13;
+.ticket-details div {&#13;
+    display: flex;&#13;
+    flex-direction: column;&#13;
+}&#13;
+&#13;
+&#13;
+.ticket-details b {&#13;
+    margin-bottom: 5px;&#13;
+    color: #555555;&#13;
+}&#13;
+&#13;
+&#13;
+.status-badge {&#13;
+    padding: 7px 14px;&#13;
+    border-radius: 20px;&#13;
+    font-size: 13px;&#13;
+    font-weight: 600;&#13;
+    background: #eeeeee;&#13;
+}&#13;
+&#13;
+&#13;
+.status-pending {&#13;
+    background: #fff3cd;&#13;
+}&#13;
+&#13;
+&#13;
+.status-approved {&#13;
+    background: #dbeafe;&#13;
+}&#13;
+&#13;
+&#13;
+.status-generated {&#13;
+    background: #d1fae5;&#13;
+}&#13;
+&#13;
+&#13;
+.status-rejected {&#13;
+    background: #fee2e2;&#13;
+}&#13;
+&#13;
+&#13;
+.status-cancelled {&#13;
+    background: #e5e7eb;&#13;
+}&#13;
+&#13;
+&#13;
+.qr-section {&#13;
+    margin-top: 28px;&#13;
+    padding-top: 22px;&#13;
+    border-top: 1px solid #eeeeee;&#13;
+    text-align: center;&#13;
+}&#13;
+&#13;
+&#13;
+.qr-section h4 {&#13;
+    margin-bottom: 16px;&#13;
+}&#13;
+&#13;
+&#13;
+.qr-code {&#13;
+    display: inline-block;&#13;
+    background: #ffffff;&#13;
+    padding: 12px;&#13;
+    border: 1px solid #eeeeee;&#13;
+    border-radius: 8px;&#13;
+}&#13;
+&#13;
+&#13;
+.qr-code img,&#13;
+.qr-code canvas {&#13;
+    display: block;&#13;
+    margin: 0 auto;&#13;
+}&#13;
+&#13;
+&#13;
+.qr-ticket-number {&#13;
+    margin-top: 12px;&#13;
+    font-weight: 600;&#13;
+    font-size: 15px;&#13;
+}&#13;
+&#13;
+&#13;
+.qr-help {&#13;
+    margin-top: 5px;&#13;
+    color: #777777;&#13;
+    font-size: 13px;&#13;
+}&#13;
+&#13;
+&#13;
+.cancelled-info {&#13;
+    margin-top: 22px;&#13;
+    padding: 15px;&#13;
+    background: #f5f5f5;&#13;
+    border-radius: 8px;&#13;
+}&#13;
+&#13;
+&#13;
+.cancelled-info div {&#13;
+    margin-bottom: 6px;&#13;
+}&#13;
+&#13;
+&#13;
+.empty-message {&#13;
+    padding: 50px;&#13;
+    text-align: center;&#13;
+    background: #ffffff;&#13;
+    border: 1px solid #dddddd;&#13;
+    border-radius: 10px;&#13;
+}&#13;
+&#13;
+&#13;
+@media (max-width: 600px) {&#13;
+&#13;
+    .page-heading {&#13;
+        flex-direction: column;&#13;
+        align-items: flex-start;&#13;
+        gap: 15px;&#13;
+    }&#13;
+&#13;
+&#13;
+    .ticket-header {&#13;
+        flex-direction: column;&#13;
+        gap: 15px;&#13;
+    }&#13;
+&#13;
+&#13;
+    .ticket-details {&#13;
+        grid-template-columns: 1fr;&#13;
+    }&#13;
+&#13;
+&#13;
+    .metro-tickets {&#13;
+        padding: 12px;&#13;
+    }&#13;
+}&#13;
+&#13;
+.cancel-action {&#13;
+    margin-top: 22px;&#13;
+    text-align: right;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Metro My Tickets</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+
+    data.tickets = [];
+    data.message = '';
+    data.error = '';
+
+    var today = new GlideDate().getValue();
+
+
+    // ---------------------------------
+    // Cancel Ticket
+    // ---------------------------------
+    if (
+        input &&
+        input.action == 'cancel'
+    ) {
+
+        var booking =
+            new GlideRecordSecure(
+                'x_1958892_metro_0_metro_booking'
+            );
+
+        if (!booking.get(input.sys_id)) {
+
+            data.error =
+                'Booking not found.';
+
+        } else if (
+            booking.getValue('requested_for') !=
+            gs.getUserID()
+        ) {
+
+            data.error =
+                'You are not authorized to cancel this ticket.';
+
+        } else if (
+            booking.getValue('metro_status') !=
+            'generated'
+        ) {
+
+            data.error =
+                'Only generated tickets can be cancelled.';
+
+        } else if (
+            booking.getValue('travel_date') < today
+        ) {
+
+            data.error =
+                'Past tickets cannot be cancelled.';
+
+        } else {
+
+            var reason =
+                input.reason || '';
+
+            if (!reason) {
+                reason =
+                    'Cancelled by passenger';
+            }
+
+            booking.setValue(
+                'metro_status',
+                'cancelled'
+            );
+
+            booking.setValue(
+                'cancellation_reason',
+                reason
+            );
+
+            booking.update();
+
+            data.message =
+                'Ticket cancelled successfully.';
+        }
+    }
+
+
+    // ---------------------------------
+    // Load Current User Tickets
+    // ---------------------------------
+
+    var gr =
+        new GlideRecordSecure(
+            'x_1958892_metro_0_metro_booking'
+        );
+
+    gr.addQuery(
+        'requested_for',
+        gs.getUserID()
+    );
+
+    gr.orderByDesc(
+        'sys_created_on'
+    );
+
+    gr.query();
+
+
+    while (gr.next()) {
+
+        var travelDate =
+            gr.getValue('travel_date');
+
+        data.tickets.push({
+
+            sys_id:
+                gr.getUniqueValue(),
+
+            number:
+                gr.getValue('number'),
+
+            ticket_number:
+                gr.getValue('ticket_number'),
+
+            source:
+                gr.getDisplayValue('source_station'),
+
+            destination:
+                gr.getDisplayValue('destination_station'),
+
+            travel_date:
+                travelDate,
+
+            journey_type:
+                gr.getDisplayValue('journey_type'),
+
+            passenger_count:
+                gr.getValue('passenger_count'),
+
+            distance_km:
+                gr.getValue('distance_km'),
+
+            duration_minutes:
+                gr.getValue('duration_minutes'),
+
+            base_fare:
+                gr.getValue('base_fare'),
+
+            total_fare:
+                gr.getValue('total_fare'),
+
+            status:
+                gr.getValue('metro_status'),
+
+            status_display:
+                gr.getDisplayValue('metro_status'),
+
+            generated_at:
+                gr.getDisplayValue('generated_at'),
+
+            refund_amount:
+                gr.getValue('refund_amount'),
+
+            cancellation_reason:
+                gr.getValue('cancellation_reason'),
+
+            qr_data:
+                gr.getValue('qr_data'),
+
+            can_cancel:
+                gr.getValue('metro_status') ==
+                    'generated' &&
+                travelDate >= today
+        });
+    }
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-17 03:37:57</sys_created_on>
+        <sys_id>dd146e72531f4f506fbf79b0a0490ef6</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>Metro My Tickets</sys_name>
+        <sys_package display_value="Metro Ticket Generating System" source="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Metro Ticket Generating System">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+        <sys_update_name>sp_widget_dd146e72531f4f506fbf79b0a0490ef6</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-17 04:56:06</sys_updated_on>
+        <template><![CDATA[<div class="metro-tickets">
+
+  <div class="page-heading">
+    <div class="alert alert-success"
+     ng-if="data.message">
+  {{data.message}}
+</div>
+
+<div class="alert alert-danger"
+     ng-if="data.error">
+  {{data.error}}
+</div>
+
+    <div>
+      <h2>My Metro Tickets</h2>
+
+      <p class="page-subtitle">
+        View your metro bookings and digital QR tickets.
+      </p>
+    </div>
+
+    <a href="?id=metro_home"
+       class="btn btn-default">
+      Back to Home
+    </a>
+
+  </div>
+
+
+  <!-- No Tickets -->
+  <div ng-if="!data.tickets.length"
+       class="empty-message">
+
+    No metro bookings found.
+
+  </div>
+
+
+  <!-- Ticket Cards -->
+  <div class="ticket-card"
+       ng-repeat="ticket in data.tickets track by ticket.sys_id">
+
+
+    <!-- Header -->
+    <div class="ticket-header">
+
+      <div>
+
+        <h3>
+          {{ticket.ticket_number || ticket.number}}
+        </h3>
+
+        <div class="route">
+
+          <span>
+            {{ticket.source}}
+          </span>
+
+          <span class="route-arrow">
+            →
+          </span>
+
+          <span>
+            {{ticket.destination}}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <span class="status-badge"
+            ng-class="'status-' + ticket.status">
+
+        {{ticket.status_display}}
+
+      </span>
+
+    </div>
+
+
+    <!-- Ticket Information -->
+    <div class="ticket-details">
+
+      <div>
+
+        <b>Booking Number</b>
+
+        <span>
+          {{ticket.number}}
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Ticket Number</b>
+
+        <span>
+          {{ticket.ticket_number || '-'}}
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Travel Date</b>
+
+        <span>
+          {{ticket.travel_date}}
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Journey Type</b>
+
+        <span>
+          {{ticket.journey_type}}
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Passengers</b>
+
+        <span>
+          {{ticket.passenger_count}}
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Distance</b>
+
+        <span>
+          {{ticket.distance_km}} km
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Estimated Duration</b>
+
+        <span>
+          {{ticket.duration_minutes}} minutes
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Base Fare</b>
+
+        <span>
+          ₹{{ticket.base_fare}}
+        </span>
+
+      </div>
+
+
+      <div>
+
+        <b>Total Fare</b>
+
+        <span>
+          ₹{{ticket.total_fare}}
+        </span>
+
+      </div>
+
+
+      <div ng-if="ticket.generated_at">
+
+        <b>Generated At</b>
+
+        <span>
+          {{ticket.generated_at}}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- QR Code -->
+    <div ng-if="ticket.status == 'generated' && ticket.qr_data"
+         class="qr-section">
+
+      <h4>
+        Digital QR Ticket
+      </h4>
+
+      <div id="qr-{{ticket.sys_id}}"
+           class="qr-code">
+      </div>
+
+      <div class="qr-ticket-number">
+
+        {{ticket.ticket_number}}
+
+      </div>
+
+      <p class="qr-help">
+
+        Present this QR ticket when required.
+
+      </p>
+
+    </div>
+    
+    <div class="cancel-action"
+     ng-if="ticket.can_cancel">
+
+  <button class="btn btn-danger"
+          ng-click="c.cancelTicket(ticket)">
+
+    Cancel Ticket
+
+  </button>
+
+</div>
+
+
+    <!-- Cancelled Ticket Information -->
+    <div ng-if="ticket.status == 'cancelled'"
+         class="cancelled-info">
+
+      <div>
+
+        <b>Refund Amount:</b>
+
+        ₹{{ticket.refund_amount}}
+
+      </div>
+
+      <div>
+
+        <b>Cancellation Reason:</b>
+
+        {{ticket.cancellation_reason}}
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

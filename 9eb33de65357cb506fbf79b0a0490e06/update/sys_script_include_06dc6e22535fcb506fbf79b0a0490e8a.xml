@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_1958892_metro_0.MetroFareAjax</api_name>
+        <caller_access/>
+        <client_callable>true</client_callable>
+        <description/>
+        <mobile_callable>false</mobile_callable>
+        <name>MetroFareAjax</name>
+        <sandbox_callable>false</sandbox_callable>
+        <script><![CDATA[var MetroFareAjax = Class.create();
+
+MetroFareAjax.prototype = Object.extendsObject(
+    global.AbstractAjaxProcessor,
+    {
+
+        calculateFare: function() {
+
+            var sourceId =
+                this.getParameter(
+                    'sysparm_source'
+                );
+
+            var destinationId =
+                this.getParameter(
+                    'sysparm_destination'
+                );
+
+            var journeyType =
+                this.getParameter(
+                    'sysparm_journey_type'
+                );
+
+            var passengerCount =
+                this.getParameter(
+                    'sysparm_passengers'
+                );
+
+
+            var service =
+                new MetroFareService();
+
+
+            var result =
+                service.calculateFare(
+                    sourceId,
+                    destinationId,
+                    journeyType,
+                    passengerCount
+                );
+
+
+            return JSON.stringify(
+                result
+            );
+        },
+
+
+        type: 'MetroFareAjax'
+    }
+);]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-16 09:41:57</sys_created_on>
+        <sys_id>06dc6e22535fcb506fbf79b0a0490e8a</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>MetroFareAjax</sys_name>
+        <sys_package display_value="Metro Ticket Generating System" source="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Metro Ticket Generating System">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+        <sys_update_name>sys_script_include_06dc6e22535fcb506fbf79b0a0490e8a</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-16 09:41:57</sys_updated_on>
+    </sys_script_include>
+</record_update>
