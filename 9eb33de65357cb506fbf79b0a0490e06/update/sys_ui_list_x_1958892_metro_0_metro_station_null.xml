@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_ui_list parent="" relationship="" sys_domain="global" table="x_1958892_metro_0_metro_station" version="2" view="">
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_created_on</element>
+            <list_id display_value="x_1958892_metro_0_metro_station" element="NULL" name="x_1958892_metro_0_metro_station" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">1aa4f96a5357cb506fbf79b0a0490ef2</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>0</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 05:30:52</sys_created_on>
+            <sys_id>96a4f96a5357cb506fbf79b0a0490ef5</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 05:30:52</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_created_by</element>
+            <list_id display_value="x_1958892_metro_0_metro_station" element="NULL" name="x_1958892_metro_0_metro_station" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">1aa4f96a5357cb506fbf79b0a0490ef2</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>1</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 05:30:52</sys_created_on>
+            <sys_id>96a4f96a5357cb506fbf79b0a0490ef6</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 05:30:52</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_updated_on</element>
+            <list_id display_value="x_1958892_metro_0_metro_station" element="NULL" name="x_1958892_metro_0_metro_station" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">1aa4f96a5357cb506fbf79b0a0490ef2</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>2</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 05:30:52</sys_created_on>
+            <sys_id>56a43d6a5357cb506fbf79b0a0490eb1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 05:30:52</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_updated_by</element>
+            <list_id display_value="x_1958892_metro_0_metro_station" element="NULL" name="x_1958892_metro_0_metro_station" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">1aa4f96a5357cb506fbf79b0a0490ef2</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>3</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 05:30:52</sys_created_on>
+            <sys_id>daa43d6a5357cb506fbf79b0a0490eb1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 05:30:52</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list_element action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element>sys_mod_count</element>
+            <list_id display_value="x_1958892_metro_0_metro_station" element="NULL" name="x_1958892_metro_0_metro_station" parent="NULL" relationship="NULL" sys_domain="global" view="Default view">1aa4f96a5357cb506fbf79b0a0490ef2</list_id>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <position>4</position>
+            <sum>false</sum>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 05:30:52</sys_created_on>
+            <sys_id>52a43d6a5357cb506fbf79b0a0490eb2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 05:30:52</sys_updated_on>
+        </sys_ui_list_element>
+        <sys_ui_list action="INSERT_OR_UPDATE">
+            <average_value>false</average_value>
+            <element/>
+            <max_value>false</max_value>
+            <min_value>false</min_value>
+            <name>x_1958892_metro_0_metro_station</name>
+            <parent/>
+            <position/>
+            <relationship/>
+            <sum>false</sum>
+            <sys_class_name>sys_ui_list</sys_class_name>
+            <sys_created_by>admin</sys_created_by>
+            <sys_created_on>2026-09-16 05:30:52</sys_created_on>
+            <sys_domain>global</sys_domain>
+            <sys_domain_path>/</sys_domain_path>
+            <sys_id>1aa4f96a5357cb506fbf79b0a0490ef2</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>x_1958892_metro_0_metro_station</sys_name>
+            <sys_package display_value="Metro Ticket Generating System" source="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Metro Ticket Generating System">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+            <sys_update_name>sys_ui_list_x_1958892_metro_0_metro_station_null</sys_update_name>
+            <sys_updated_by>admin</sys_updated_by>
+            <sys_updated_on>2026-09-16 05:30:52</sys_updated_on>
+            <sys_user/>
+            <view display_value="Default view" name="NULL">Default view</view>
+            <view_name/>
+        </sys_ui_list>
+    </sys_ui_list>
+</record_update>

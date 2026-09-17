@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="1a4cc22e531bcb506fbf79b0a0490ec3" label="Metro Route Master" max_length="40" name="x_1958892_metro_0_metro_route_master" type="collection">
+        <element label="Source Station" max_length="32" name="source_station" reference="x_1958892_metro_0_metro_station" type="reference"/>
+        <element display="true" label="Route Name" max_length="200" name="route_name" type="string"/>
+        <element label="Duration Minutes" max_length="40" name="duration_minutes" type="integer"/>
+        <element label="Destination Station" max_length="32" name="destination_station" reference="x_1958892_metro_0_metro_station" type="reference"/>
+        <element label="Distance KM" max_length="38" name="distance_km" type="decimal"/>
+        <element label="Active" max_length="40" name="active" type="boolean"/>
+        <index name="index">
+            <element name="destination_station"/>
+        </index>
+        <index name="index2">
+            <element name="source_station"/>
+        </index>
+    </element>
+</database>

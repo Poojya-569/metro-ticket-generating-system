@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_script">
+    <sys_script action="INSERT_OR_UPDATE">
+        <abort_action>false</abort_action>
+        <access>package_private</access>
+        <action_delete>false</action_delete>
+        <action_insert>false</action_insert>
+        <action_query>false</action_query>
+        <action_update>true</action_update>
+        <active>true</active>
+        <add_message>false</add_message>
+        <advanced>true</advanced>
+        <change_fields>false</change_fields>
+        <client_callable>false</client_callable>
+        <collection>x_1958892_metro_0_metro_booking</collection>
+        <condition/>
+        <description/>
+        <execute_function>false</execute_function>
+        <filter_condition/>
+        <is_rest>false</is_rest>
+        <message/>
+        <name>Calculate Metro Refund</name>
+        <order>100</order>
+        <priority>100</priority>
+        <rest_method/>
+        <rest_method_text/>
+        <rest_service/>
+        <rest_service_text/>
+        <rest_variables/>
+        <role_conditions/>
+        <script><![CDATA[(function executeRule(current, previous) {
+
+    if (!current.metro_status.changesTo('cancelled')) {
+        return;
+    }
+
+    var fare =
+        parseFloat(current.getValue('total_fare')) || 0;
+
+    var travelDate =
+        current.getValue('travel_date');
+
+    var today =
+        new GlideDate().getValue();
+
+    var refund = 0;
+
+    if (travelDate > today) {
+
+        refund = fare * 0.90;
+
+    } else if (travelDate == today) {
+
+        refund = fare * 0.50;
+
+    } else {
+
+        refund = 0;
+    }
+
+    refund =
+        Math.round(refund * 100) / 100;
+
+    current.setValue(
+        'refund_amount',
+        refund
+    );
+
+})(current, previous);]]></script>
+        <sys_class_name>sys_script</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-17 03:03:33</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>c85c9e7253db4f506fbf79b0a0490e5b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Calculate Metro Refund</sys_name>
+        <sys_overrides/>
+        <sys_package display_value="Metro Ticket Generating System" source="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Metro Ticket Generating System">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+        <sys_update_name>sys_script_c85c9e7253db4f506fbf79b0a0490e5b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-17 03:03:33</sys_updated_on>
+        <template/>
+        <when>before</when>
+    </sys_script>
+    <sys_translated_text action="delete_multiple" query="documentkey=c85c9e7253db4f506fbf79b0a0490e5b"/>
+</record_update>

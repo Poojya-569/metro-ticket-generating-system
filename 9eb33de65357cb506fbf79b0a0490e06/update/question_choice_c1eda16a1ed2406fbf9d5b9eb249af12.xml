@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="question_choice">
+    <question_choice action="INSERT_OR_UPDATE">
+        <inactive>false</inactive>
+        <order>2</order>
+        <published_ref/>
+        <question display_value="Journey Type">163292a882d14e8e80bbc76794eb20a9</question>
+        <sys_class_name>question_choice</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-16 09:53:44</sys_created_on>
+        <sys_id>c1eda16a1ed2406fbf9d5b9eb249af12</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Return Journey</sys_name>
+        <sys_package display_value="Metro Ticket Generating System" source="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Metro Ticket Generating System">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+        <sys_update_name>question_choice_c1eda16a1ed2406fbf9d5b9eb249af12</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-16 09:53:44</sys_updated_on>
+        <text>Return Journey</text>
+        <value>return</value>
+    </question_choice>
+    <fx_price action="delete_multiple" query="id=c1eda16a1ed2406fbf9d5b9eb249af12"/>
+</record_update>

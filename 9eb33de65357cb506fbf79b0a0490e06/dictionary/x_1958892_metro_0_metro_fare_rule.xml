@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="3f24ca6a53d7cb506fbf79b0a0490ee9" label="Metro Fare Rule" max_length="40" name="x_1958892_metro_0_metro_fare_rule" type="collection">
+        <element default="true" label="Active" max_length="255" name="active" type="boolean"/>
+        <element label="Effective From" max_length="40" name="effective_from" type="glide_date"/>
+        <element label="Minimum Distance" max_length="38" name="minimum_distance" type="decimal"/>
+        <element label="Fare" max_length="38" name="fare" type="decimal"/>
+        <element label="Maximum Distance" max_length="38" name="maximum_distance" type="decimal"/>
+        <element label="Zone" max_length="40" name="zone" type="integer"/>
+    </element>
+</database>

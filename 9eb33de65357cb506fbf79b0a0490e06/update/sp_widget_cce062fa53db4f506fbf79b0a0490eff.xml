@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sp_widget">
+    <sp_widget action="INSERT_OR_UPDATE">
+        <category>custom</category>
+        <client_script><![CDATA[api.controller=function() {
+  /* widget controller */
+  var c = this;
+};]]></client_script>
+        <controller_as>c</controller_as>
+        <css>.metro-home {&#13;
+    max-width: 900px;&#13;
+    margin: 50px auto;&#13;
+    padding: 20px;&#13;
+    text-align: center;&#13;
+}&#13;
+&#13;
+.metro-home h1 {&#13;
+    font-size: 32px;&#13;
+    margin-bottom: 10px;&#13;
+}&#13;
+&#13;
+.subtitle {&#13;
+    font-size: 16px;&#13;
+    margin-bottom: 35px;&#13;
+}&#13;
+&#13;
+.metro-actions {&#13;
+    display: flex;&#13;
+    justify-content: center;&#13;
+    gap: 24px;&#13;
+    flex-wrap: wrap;&#13;
+}&#13;
+&#13;
+.metro-card {&#13;
+    width: 320px;&#13;
+    padding: 30px;&#13;
+    background: #ffffff;&#13;
+    border: 1px solid #dddddd;&#13;
+    border-radius: 12px;&#13;
+    text-decoration: none;&#13;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.08);&#13;
+    transition: 0.2s;&#13;
+}&#13;
+&#13;
+.metro-card:hover {&#13;
+    text-decoration: none;&#13;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);&#13;
+    transform: translateY(-2px);&#13;
+}&#13;
+&#13;
+.metro-card h3 {&#13;
+    margin-top: 0;&#13;
+}</css>
+        <data_table>sp_instance</data_table>
+        <demo_data/>
+        <description/>
+        <docs/>
+        <field_list/>
+        <has_preview>false</has_preview>
+        <id/>
+        <internal>false</internal>
+        <link><![CDATA[function link(scope, element, attrs, controller) {
+  
+}]]></link>
+        <name>Metro Ticket Home</name>
+        <option_schema/>
+        <public>false</public>
+        <roles/>
+        <script><![CDATA[(function() {
+  /* populate the 'data' object */
+  /* e.g., data.table = $sp.getValue('table'); */
+
+})();]]></script>
+        <servicenow>false</servicenow>
+        <sys_class_name>sp_widget</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2026-09-17 03:24:12</sys_created_on>
+        <sys_id>cce062fa53db4f506fbf79b0a0490eff</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Metro Ticket Home</sys_name>
+        <sys_package display_value="Metro Ticket Generating System" source="x_1958892_metro_0">9eb33de65357cb506fbf79b0a0490e06</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Metro Ticket Generating System">9eb33de65357cb506fbf79b0a0490e06</sys_scope>
+        <sys_update_name>sp_widget_cce062fa53db4f506fbf79b0a0490eff</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2026-09-17 03:24:12</sys_updated_on>
+        <template><![CDATA[<div class="metro-home">
+
+  <h1>Hyderabad Metro Ticket Booking</h1>
+
+  <p class="subtitle">
+    Book, track and manage your metro tickets.
+  </p>
+
+  <div class="metro-actions">
+
+    <a class="metro-card"
+       href="?id=sc_cat_item&sys_id=c4ab8de9d05b41c1bd2eb1c7bfab54aa">
+
+      <h3>Book Metro Ticket</h3>
+
+      <p>
+        Select stations, travel date and generate your metro ticket.
+      </p>
+
+    </a>
+
+    <a class="metro-card"
+       href="?id=metro_my_tickets">
+
+      <h3>My Tickets</h3>
+
+      <p>
+        View your bookings, ticket details and QR tickets.
+      </p>
+
+    </a>
+
+  </div>
+
+</div>]]></template>
+    </sp_widget>
+</record_update>

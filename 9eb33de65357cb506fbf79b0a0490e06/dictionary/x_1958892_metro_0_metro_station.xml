@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="31a43d6a5357cb506fbf79b0a0490e31" label="Metro Station" max_length="40" name="x_1958892_metro_0_metro_station" type="collection">
+        <element default="true" label="Active" max_length="40" name="active" type="boolean"/>
+        <element label="Metro Line" max_length="50" name="metro_line" type="string"/>
+        <element display="true" label="Station Name" max_length="40" name="station_name" type="string"/>
+        <element label="Interchange" max_length="40" name="interchange" type="boolean"/>
+    </element>
+</database>
