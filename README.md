@@ -81,6 +81,81 @@ Distance: 29 KM
 
 Base Fare: ₹69
 
+## Currently Supported Demo Routes
+
+The current version of the Metro Ticket Generating System uses a configured
+**Metro Route Master** to calculate distance, estimated journey duration,
+and fare.
+
+The following routes are currently configured and supported:
+
+| Source Station | Destination Station | Distance | Estimated Duration |
+|---|---|---:|---:|
+| Miyapur | L B Nagar | 29 km | 52 min |
+| Miyapur | Ameerpet | 13 km | 24 min |
+| Miyapur | MG Bus Station | 22 km | 39 min |
+| KPHB Colony | Ameerpet | 10.4 km | 20 min |
+| Kukatpally | Ameerpet | 9.1 km | 18 min |
+| Ameerpet | L B Nagar | 16 km | 29 min |
+| Ameerpet | Nagole | 17 km | 31 min |
+| Ameerpet | Raidurg | 11 km | 21 min |
+| Nagole | Raidurg | 28 km | 52 min |
+| Parade Ground | Ameerpet | 6.5 km | 14 min |
+| Parade Ground | Raidurg | 17.5 km | 34 min |
+| JBS Parade Ground | MG Bus Station | 11 km | 20 min |
+| Secunderabad West | MG Bus Station | 9.6 km | 17 min |
+| Dilsukhnagar | Ameerpet | 13 km | 24 min |
+| MG Bus Station | Ameerpet | 9 km | 17 min |
+
+### Reverse Direction Support
+
+The fare calculation service also checks the reverse direction automatically.
+
+For example, if the following route exists:
+
+`Ameerpet → Raidurg`
+
+then the application can also calculate:
+
+`Raidurg → Ameerpet`
+
+without requiring a second Route Master record.
+
+### Fare Calculation
+
+For a supported route, the application performs the following process:
+
+1. Finds the route in Metro Route Master.
+2. Retrieves the configured distance and estimated duration.
+3. Uses the route distance to find the applicable Metro Fare Rule.
+4. Calculates the base fare.
+5. Applies journey type and passenger count.
+6. Displays the calculated fare to the passenger before booking.
+
+Example:
+
+`Miyapur → L B Nagar`
+
+- Distance: 29 km
+- Estimated Duration: 52 minutes
+- Single Journey Fare for 1 passenger: ₹69
+
+### Current Scope / Limitation
+
+This is an academic ServiceNow implementation.
+
+The current application supports the configured demo routes listed above
+rather than every possible Hyderabad Metro station-to-station combination.
+
+Station names and fare bands are based on publicly available Hyderabad Metro
+information. The route distances and estimated journey durations stored in
+the current Route Master are project/demo values used to demonstrate the
+ServiceNow booking and fare-calculation workflow.
+
+A future enhancement can calculate routes dynamically from station sequence,
+metro line, interchange station, and route-segment information so that all
+station combinations can be supported.
+
 ## QR Ticket
 
 Generated tickets contain QR data including:
@@ -125,3 +200,21 @@ Development branch:
 Changes are merged into:
 
 `main`
+
+## Known Limitations / Future Enhancements
+
+### Known Limitations
+
+- Only routes configured in the **Metro Route Master** are currently supported.
+- Route distance and duration values are project/demo values.
+- The generated QR code is for academic demonstration and is not connected to the real Hyderabad Metro gate validation system.
+- The project is hosted on a ServiceNow Personal Developer Instance, so availability depends on the PDI remaining active.
+- Email delivery may depend on ServiceNow PDI email configuration.
+
+### Future Enhancements
+
+- Support all metro station combinations using dynamic route calculation.
+- Add QR validation for entry and exit.
+- Add payment gateway integration.
+- Add stronger role-based access for passengers, approvers, and administrators.
+- Add reporting and analytics for bookings, cancellations, and fares.
