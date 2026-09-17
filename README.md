@@ -165,7 +165,6 @@ Email delivery behavior can depend on the ServiceNow Personal Developer Instance
 
 ## Application Flow
 
-```text
 Passenger Login
       ↓
 Metro Service Portal
@@ -393,7 +392,6 @@ There is no passenger-facing Approvals section in the current version.
 
 ## Cancellation and Refund Flow
 
-```text
 Generated Ticket
       ↓
 Passenger selects Cancel Ticket
