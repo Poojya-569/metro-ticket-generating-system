@@ -16,7 +16,7 @@ The project includes:
 - Route and fare configuration
 - Automatic fare calculation
 - Service Catalog / Record Producer booking
-- Automated backend approval
+- Approval workflow using Flow Designer
 - Ticket number generation
 - Digital QR ticket generation
 - My Tickets portal
@@ -61,19 +61,51 @@ Return journey:
 
 `Base Fare × 2 × Passenger Count`
 
-### 3. Automated Approval
+### 3. Approval Workflow
 
-For the current project demonstration, approval is handled automatically in the backend.
+The project was initially implemented with a **manual approval workflow**.
 
-After a valid booking is created:
+Original development flow:
 
-1. The booking is initially created with `Pending` status.
-2. Flow Designer automatically updates the inherited Approval field to `Approved`.
-3. The ticket-generation Business Rule detects the approval.
-4. A ticket number and QR data are generated.
-5. Metro Status changes to `Generated`.
+```text
+Booking Submitted
+      ↓
+Pending
+      ↓
+Approval Request Created
+      ↓
+Approver Approves / Rejects
+      ↓
+Approved
+      ↓
+Ticket Number Generated
+      ↓
+QR Generated
+```
 
-The approval process is not exposed on the passenger website.
+In the original implementation, the QR ticket was generated only after the approval request was approved.
+
+For the **final evaluator/demo configuration**, the approval step is automated in the backend using Flow Designer. This allows an evaluator to test the complete booking-to-QR workflow using a single login without requiring a separate approver account.
+
+Final demo flow:
+
+```text
+Booking Submitted
+      ↓
+Pending
+      ↓
+Flow Designer Automatically Sets Approval = Approved
+      ↓
+Generate Metro Ticket Business Rule Runs
+      ↓
+Ticket Number Generated
+      ↓
+QR Generated
+      ↓
+Metro Status = Generated
+```
+
+The approval logic is still part of the backend workflow; only the manual approver action is automated for demonstration convenience.
 
 ### 4. Digital Ticket Generation
 
@@ -159,12 +191,13 @@ If a booking is still pending and its travel date has already passed, the system
 
 The application includes notifications for ticket-related events.
 
-Email delivery behavior can depend on the ServiceNow Personal Developer Instance email configuration.
+Approval-request notification behavior was implemented during the manual approval version of the workflow. Email delivery behavior may depend on the ServiceNow Personal Developer Instance email configuration.
 
 ---
 
 ## Application Flow
 
+```text
 Passenger Login
       ↓
 Metro Service Portal
@@ -198,6 +231,9 @@ View Digital QR Ticket
 Cancel Ticket (if eligible)
       ↓
 Refund Calculated
+```
+
+---
 
 ## Metro Booking Statuses
 
@@ -386,12 +422,13 @@ Allows passengers to:
 - Cancel eligible tickets
 - View refund information
 
-There is no passenger-facing Approvals section in the current version.
+There is no passenger-facing Approvals section in the final demo version.
 
 ---
 
 ## Cancellation and Refund Flow
 
+```text
 Generated Ticket
       ↓
 Passenger selects Cancel Ticket
@@ -405,19 +442,46 @@ Refund Business Rule Runs
 Refund Amount Calculated
       ↓
 My Tickets Displays Refund Information
+```
+
+---
 
 ## Security / User Access
 
-The current portal is designed for a passenger login.
+The current portal is designed for a logged-in passenger/demo user.
 
 The application:
 
 - Shows only the logged-in passenger's tickets in **My Tickets**
 - Validates ticket ownership before cancellation
 - Does not expose approval controls on the passenger website
-- Keeps approval processing in the backend for the current demonstration configuration
+- Keeps approval processing in the backend for the final demo configuration
 
-Additional role-based access control can be added for a production implementation.
+During development, manual approver-based processing was implemented. The final evaluator version uses backend automatic approval so the complete workflow can be tested using one login.
+
+Additional role-based access control and separate approver access can be enabled for a production implementation.
+
+---
+
+## Requirement Alignment
+
+The original project requirement includes separate administrator/developer responsibilities and manual approval.
+
+This project implements the core functional requirements including:
+
+- Station, route, and fare master data
+- Dynamic fare calculation
+- Booking through Service Portal
+- Pending / Approved / Generated / Cancelled status handling
+- Approval workflow logic
+- Ticket number generation
+- QR generation
+- Cancellation and refund logic
+- Scheduled processing
+- Notifications
+- GitHub source control
+
+For the final submitted demo, manual approver interaction is replaced with **automatic backend approval** only so the evaluator can directly verify ticket generation and QR functionality without requiring a separate approver account.
 
 ---
 
@@ -441,18 +505,20 @@ This repository contains ServiceNow application metadata generated by the platfo
 
 An evaluator can test the project using the following flow:
 
-1. Open the Metro Ticket Booking portal.
-2. Click **Book Metro Ticket**.
-3. Select one of the supported source/destination combinations.
-4. Select the travel date.
-5. Select the journey type.
-6. Enter the passenger count.
-7. Verify the calculated distance, duration, and fare.
-8. Submit the booking.
-9. Open **My Tickets**.
-10. Verify the generated ticket number and QR code.
-11. Cancel an eligible ticket if cancellation testing is required.
-12. Verify the cancellation status and refund amount.
+1. Log in using the provided demo credentials.
+2. Open the Metro Ticket Booking portal.
+3. Click **Book Metro Ticket**.
+4. Select one of the supported source/destination combinations.
+5. Select the travel date.
+6. Select the journey type.
+7. Enter the passenger count.
+8. Verify the calculated distance, duration, and fare.
+9. Submit the booking.
+10. The backend automatically completes the approval step.
+11. Open **My Tickets**.
+12. Verify the generated ticket number and QR code.
+13. Cancel an eligible ticket if cancellation testing is required.
+14. Verify the cancellation status and refund amount.
 
 For a simple test, use:
 
@@ -473,14 +539,14 @@ Expected demo values:
 - Only routes configured in the **Metro Route Master** are currently supported.
 - Route distance and duration values are project/demo values.
 - The QR code is for academic demonstration and is not connected to the real Hyderabad Metro gate validation system.
-- The current demonstration configuration uses automatic backend approval instead of a separate approver login.
+- The final demonstration configuration uses automatic backend approval instead of requiring a separate approver login.
 - The project is hosted on a ServiceNow Personal Developer Instance, so availability depends on the PDI remaining active.
 - Email delivery may depend on ServiceNow PDI email configuration.
 
 ### Future Enhancements
 
 - Support all station combinations using dynamic route calculation.
-- Add a dedicated role-based approver portal for production use.
+- Re-enable a dedicated role-based approver portal for production use.
 - Add QR validation for metro entry and exit.
 - Add payment gateway integration.
 - Add reporting and analytics for bookings and cancellations.
@@ -497,7 +563,8 @@ Core functionality is implemented and integrated:
 - Fare Calculation 
 - Record Producer Booking 
 - Backend Validation 
-- Automated Approval 
+- Manual Approval Workflow Implemented During Development 
+- Automatic Approval Enabled for Final Demo 
 - Ticket Number Generation 
 - QR Ticket Generation 
 - My Tickets Portal 
